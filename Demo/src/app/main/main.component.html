@@ -1,0 +1,177 @@
+
+<!-- <ul>
+  <li *ngFor="let item of items | async">
+  {{ item.ID }}<br>
+  {{item.Name}}<br>
+  {{item.Color}}<br>
+  {{item.Size}}
+  </li>
+</ul> -->
+<style>
+  .dot{
+border-radius:100%;
+padding:4px;
+display:inline-block;
+margin-right:3px;
+margin-right:0.25rem !important;
+}
+</style>
+<div class="row">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+              <h4 class="card-title">Database</h4>
+              <div class="table-responsive">
+                  <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_length" id="zero_config_length">
+                          <label>Show <select name="zero_config_length" aria-controls="zero_config" class="form-control form-control-sm">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                          </select></label>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6"><div id="zero_config_filter" class="dataTables_filter">
+                        <label>Search:<input type="search" class="form-control form-control-sm" placeholder="..." aria-controls="zero_config"></label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <table id="zero_config" class="table table-striped table-bordered no-wrap dataTable" role="grid" aria-describedby="zero_config_info">
+                      <thead>
+                          <tr role="row">
+                            <th rowspan="1" colspan="1">ID</th>
+                            <th rowspan="1" colspan="1">Name</th>
+                            <th rowspan="1" colspan="1">Color</th>
+                            <th rowspan="1" colspan="1">Size</th>
+                            <th rowspan="1" colspan="1">Price</th>
+                            <th rowspan="1" colspan="1">Image</th>
+                            <th rowspan="1" colspan="1">Status</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                      <tr role="row" class="odd" *ngFor="let item of items | async">
+                              <td>{{item.ID}}</td>
+                              <td>{{ item.Name }}</td>
+                              <td>{{ item.Color }}</td>
+                              <td>{{ item.Size }}</td>
+                              <td>{{ item.Price }}</td>
+                              <td class="mr-3">
+                                <img
+                                   src="{{item.Image}}" alt="user" class="rounded-circle" width="55" height="55" />
+                              </td>
+                              <td class="dot fa fa-circle" [ngStyle]="{'color' : item.Status === 'yes'  ? 'green':'red' }"><i
+                                class="border-top-0 text-center px-2 py-4" data-toggle="tooltip"
+                                data-placement="top" title="In Testing"></i></td>
+                              <td> <button (click)="onEditPost(item)"  href="#" class="btn waves-effect waves-light btn-rounded btn-danger">Edit</button></td>
+                              <td> <button (click)="onDeletePost(item)" href="#" class="btn waves-effect waves-light btn-rounded btn-warning">Delete</button></td>
+                      </tr>
+                      </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <br>
+              <div class="row">
+                <div class="col-sm-12 col-md-5">
+                  <div class="dataTables_info" id="zero_config_info" role="status" aria-live="polite">Showing data</div>
+                </div>
+                <div class="col-sm-12 col-md-7">
+                  <div class="dataTables_paginate paging_simple_numbers" id="zero_config_paginate">
+                    <ul class="pagination">
+                      <li class="paginate_button page-item previous disabled" id="zero_config_previous">
+                        <a href="#" aria-controls="zero_config" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                      </li>
+                      <li class="paginate_button page-item active">
+                        <a href="#" aria-controls="zero_config" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+                      </li>
+                      <li class="paginate_button page-item ">
+                        <a href="#" aria-controls="zero_config" data-dt-idx="2" tabindex="0" class="page-link">2</a>
+                      </li>
+                      <li class="paginate_button page-item ">
+                        <a href="#" aria-controls="zero_config" data-dt-idx="3" tabindex="0" class="page-link">3</a>
+                      </li>
+                      <li class="paginate_button page-item ">
+                        <a href="#" aria-controls="zero_config" data-dt-idx="4" tabindex="0" class="page-link">Next</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+   </div>
+ </div>
+
+ <div class="row">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+              <h4 class="card-title" style="text-align: center;">Add New Product</h4>
+              <form [formGroup] ="insertForm" (ngSubmit)="onInsert(insertForm.value)" id="validationform" data-parsley-validate="" novalidate="">
+                  <div class="form-body" style="margin-left: 150px;" >
+                      <label>ID</label>
+                          <div class="col-12 col-sm-8 col-lg-6">
+                              <div class="form-group">
+                                  <input formControlName="ID" type="text" required="" placeholder="..." class="form-control">
+                              </div>
+                          </div>
+                      <label>Name</label>
+                      <div class="col-12 col-sm-8 col-lg-6">
+                          <div class="form-group">
+                              <input formControlName="Name" type="text" required="" placeholder="..." class="form-control">
+                          </div>
+                      </div>
+                      <label>Color</label>
+                      <div class="col-12 col-sm-8 col-lg-6">
+                          <div class="form-group">
+                              <input formControlName="Color" type="text" required="" placeholder="..." class="form-control">
+                          </div>
+                      </div>
+                      <label>Size</label>
+                      <div class="col-12 col-sm-8 col-lg-6">
+                          <div class="form-group">
+                              <input formControlName="Size" type="text" required="" placeholder="..." class="form-control">
+                          </div>
+                      </div>
+                      <label>Price</label>
+                      <div class="col-12 col-sm-8 col-lg-6">
+                          <div class="form-group">
+                              <input formControlName="Price" type="text" required="" placeholder="..." class="form-control">
+                          </div>
+                      </div>
+                      <label>Image</label>
+                      <div class="col-12 col-sm-8 col-lg-6">
+                          <div class="form-group">
+                              <input formControlName="Image" type="text" required="" placeholder="..." class="form-control">
+                          </div>
+                      </div>
+                      <label>Status</label>
+                      <div class="col-12 col-sm-8 col-lg-6">
+                          <div class="form-group">
+                              <input formControlName="Status" type="text" required="" placeholder="..." class="form-control">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="form-actions">
+                      <div class="text-right col col-sm-10 col-lg-9 offset-sm-1 offset-lg-0">
+                          <button type="submit" class="btn btn-info btn-rounded"><i
+                          class="far fa-heart"></i> Submit</button>
+                          <button type="submit" class="btn btn-dark btn-rounded"><i
+                            class="far fa-heart"></i> Update</button>
+
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+

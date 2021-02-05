@@ -1,0 +1,105 @@
+<!-- <ul>
+  <li *ngFor="let item of itemList | async">
+  {{ item.name }}<br>
+  {{item.id}}
+  </li>
+</ul>
+
+<hr>
+
+<ul>
+  <li *ngFor="let item of itemList1 ">
+  {{ item.name }}<br>
+  {{item.id}}
+  </li>
+</ul> -->
+
+<div class="col-12">
+  <div class="card">
+      <div class="card-body">
+          <h4 class="card-title">Items</h4>
+      </div>
+      <div class="table-responsive">
+          <table class="table table-striped table-dark mb-0">
+              <thead>
+                  <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Color</th>
+                      <th scope="col">Size</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let item of itemList | async">
+                      <th scope="row">{{item.id}}</th>
+                      <td>{{item.name}}</td>
+                      <td>{{item.color}}</td>
+                      <td>{{item.size}}</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+              <h4 class="card-title" style="text-align: center;">Add New Product</h4>
+              <form [formGroup] ="itemForm" (ngSubmit)="onItem()" id="validationform" data-parsley-validate="" novalidate="">
+                  <div class="form-body" style="margin-left: 150px;" >
+                      <label>ID</label>
+                          <div class="col-12 col-sm-8 col-lg-6">
+                              <div class="form-group">
+                                  <input formControlName="ID" type="text" required="" placeholder="..." class="form-control">
+                                  <div *ngIf="itemForm.controls.ID.invalid && (itemForm.controls.ID.dirty ||itemForm.controls.ID.touched)">
+                                    <small *ngIf="itemForm.controls.ID.errors.required" class="text-danger">ID is required.</small>
+                                  </div>
+                              </div>
+                          </div>
+                      <label>Name</label>
+                      <div class="col-12 col-sm-8 col-lg-6">
+                          <div class="form-group">
+                              <input formControlName="Name" type="text" required="" placeholder="..." class="form-control">
+                              <div *ngIf="itemForm.controls.Name.invalid && (itemForm.controls.Name.dirty ||itemForm.controls.Name.touched)">
+                                <small *ngIf="itemForm.controls.Name.errors.required" class="text-danger">Name is required.</small>
+                              </div>
+                          </div>
+                      </div>
+                      <label>Color</label>
+                      <div class="col-12 col-sm-8 col-lg-6">
+                          <div class="form-group">
+                              <input formControlName="Color" type="text" required="" placeholder="..." class="form-control">
+                              <div *ngIf="itemForm.controls.Color.invalid && (itemForm.controls.Color.dirty ||itemForm.controls.Color.touched)">
+                                <small *ngIf="itemForm.controls.Color.errors.required" class="text-danger">Color is required.</small>
+                              </div>
+                          </div>
+                      </div>
+                      <label>Size</label>
+                      <div class="col-12 col-sm-8 col-lg-6">
+                          <div class="form-group">
+                              <input formControlName="Size" type="text" required="" placeholder="..." class="form-control">
+                              <div *ngIf="itemForm.controls.Size.invalid && (itemForm.controls.Size.dirty ||itemForm.controls.Size.touched)">
+                                <small *ngIf="itemForm.controls.Size.errors.required" class="text-danger">Size is required.</small>
+                              </div>
+                          </div>
+                      </div>
+
+
+
+                  </div>
+                  <div class="form-actions">
+                      <div class="text-right col col-sm-10 col-lg-9 offset-sm-1 offset-lg-0">
+                          <button type="submit" class="btn btn-info btn-rounded"><i
+                          class="far fa-heart"></i> Submit</button>
+                          <button type="submit" class="btn btn-dark btn-rounded"><i
+                            class="far fa-heart"></i> Update</button>
+
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
